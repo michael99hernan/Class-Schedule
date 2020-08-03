@@ -1,0 +1,16 @@
+﻿@model SchedulePicker.ViewModels.AddCourseViewModel
+
+@{
+    ViewData["Title"] = "Add Course";
+}
+
+<h1>Add Course</h1>
+
+<div>
+    <div class="col-sm-6">
+        <label asp-for="CourseId">Course Name</label>
+        <select asp-for="CourseId" asp-items="Model.Courses"></select>
+    </div>
+</div>
+
+</div>

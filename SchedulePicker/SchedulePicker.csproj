@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-SchedulePicker-0FB5D339-B84B-4082-A95F-EBF915195157</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200803025136_addStudentCourse.cs" />
+    <Compile Remove="Data\Migrations\20200803025136_addStudentCourse.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200803025808_StuenFkey.cs" />
+    <Compile Remove="Data\Migrations\20200803025808_StuenFkey.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200803025842_FkeyStudentCourses.cs" />
+    <Compile Remove="Data\Migrations\20200803025842_FkeyStudentCourses.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200803030214_AddedStudentTable.cs" />
+    <Compile Remove="Data\Migrations\20200803030214_AddedStudentTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200803033736_Identity2.cs" />
+    <Compile Remove="Data\Migrations\20200803033736_Identity2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+  </ItemGroup>
+
+</Project>
