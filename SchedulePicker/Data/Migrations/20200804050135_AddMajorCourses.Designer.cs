@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchedulePicker.Data;
 
 namespace SchedulePicker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200804050135_AddMajorCourses")]
+    partial class AddMajorCourses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -626,7 +628,7 @@ namespace SchedulePicker.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.StudentCourse", b =>
+            modelBuilder.Entity("SchedulePicker.Models.StudentCourses", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -645,7 +647,7 @@ namespace SchedulePicker.Data.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentCourse");
+                    b.ToTable("StudentCourses");
                 });
 
             modelBuilder.Entity("Schedule.Models.Student", b =>
@@ -746,9 +748,9 @@ namespace SchedulePicker.Data.Migrations
                         .HasForeignKey("PrerequisiteId");
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.StudentCourse", b =>
+            modelBuilder.Entity("SchedulePicker.Models.StudentCourses", b =>
                 {
-                    b.HasOne("SchedulePicker.Models.StudentCourse", "Course")
+                    b.HasOne("Schedule.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId");
 

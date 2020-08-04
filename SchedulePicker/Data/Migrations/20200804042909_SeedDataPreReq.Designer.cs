@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchedulePicker.Data;
 
 namespace SchedulePicker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200804042909_SeedDataPreReq")]
+    partial class SeedDataPreReq
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,9 +237,6 @@ namespace SchedulePicker.Data.Migrations
                     b.Property<string>("ClassLevel")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CourseType")
-                        .HasColumnType("int");
-
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
@@ -263,7 +262,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 1,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "This course presents an integrated approach to writing, reading, and critical thinking by developing the grammatical, logical, and rhetorical skills necessary for university writing.",
                             Name = "Rhetoric",
@@ -274,7 +272,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 2,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "Expands students' professional and team communication skills and strategies in technical contexts. Integrates writing, speaking and group communication by developing and presenting technical information to different audiences. Written assignments focus on creating professional technical documents, such as proposals, memos, abstracts, reports and letters. Presentation assignments emphasize planning, preparing and delivering dynamic, informative and persuasive presentations. Attendance at first class mandatory.",
                             Name = "Professional and Technical Communication",
@@ -285,7 +282,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 3,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 4,
                             Description = "Functions, limits, continuity, differentiation; integration of function of one variable; logarithmic, exponential, and inverse trigonometric functions; techniques of integration, and applications. Three lecture hours and two discussion hours a week; problem section required with MATH 2417, and will also be registered for exam section. Not all MATH/STAT courses may be counted toward various degree plans. Please consult your degree plan to determine the appropriate MATH/STAT course requirements. ",
                             Name = "Calculus I",
@@ -296,7 +292,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 4,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "Calculus based. Basic physics including a study of space and time, kinematics, forces, energy and momentum, conservation laws, rotational motion, torques, and harmonic oscillation. Two lectures per week. Students will also be registered for an exam section.",
                             Name = "Mechanics",
@@ -307,7 +302,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 5,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "Topics include electrostatics and electromagnetics, electric field and potential, electric currents, magnetic fields, laws of Coulomb, Ampere, and Faraday, Maxwell's theory of wave propagation. Two lectures per week. Students will also be registered for an exam section.",
                             Name = "Electromagnetism and Waves",
@@ -318,7 +312,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 6,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "",
                             Name = "Language, Philosphy and Culture",
@@ -329,7 +322,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 7,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "",
                             Name = "Creative Arts I",
@@ -340,7 +332,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 8,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "",
                             Name = "Creative Arts II",
@@ -351,7 +342,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 9,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "",
                             Name = "American History I",
@@ -362,7 +352,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 10,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "",
                             Name = "American History II",
@@ -373,7 +362,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 11,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "Survey of American national government, politics, and constitutional development. ",
                             Name = "American National Government",
@@ -384,7 +372,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 12,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "Survey of state and local government and politics with special reference to the constitution and politics of Texas.",
                             Name = "State and Local Government",
@@ -395,7 +382,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 13,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 3,
                             Description = "This course exposes students to major theoretical approaches and professional codes of ethics and how they may be applied to explore a range of important social issues in the information age. Issues of professional ethics, computer crime and privacy, intellectual property, the balance between the acceptability of risk and constraints such as cost, scheduling, safety and quality, the role of globalization and various important constitutional issues are explored by drawing upon case studies. Prerequisite: Completion of an 030 core course.",
                             Name = "Social Issues and Ethics in Science and Technology",
@@ -406,7 +392,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 14,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 4,
                             Description = "Improper integrals, sequences, infinite series, power series, parametric equations and polar coordinates, vectors, vector valued functions, functions of several variables, partial derivatives and applications, and multiple integration. Three lecture hours and two discussion hours a week; problem section required with MATH 2419, and will also be registered for exam section. ",
                             Name = "Calculus II",
@@ -417,146 +402,11 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 15,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 0,
                             Credits = 1,
                             Description = "Laboratory course to accompany any Physics I or Mechanics course. Experiments investigate basic measurements and statistics including error, mean, standard deviation and error propagation; one dimensional and two dimensional motion; Newton's laws; conservation laws of energy and momentum; rotational motion; and oscillations.",
                             Name = "Physics Lab",
                             Number = 2125,
                             Prefix = "PHYS"
-                        });
-                });
-
-            modelBuilder.Entity("SchedulePicker.Models.Major", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("School")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Majors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Computer Science",
-                            School = "Erik School of Engineering"
-                        });
-                });
-
-            modelBuilder.Entity("SchedulePicker.Models.MajorCourse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MajorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("MajorId");
-
-                    b.ToTable("MajorCourses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CourseId = 1,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CourseId = 2,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CourseId = 3,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CourseId = 4,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CourseId = 5,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CourseId = 6,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CourseId = 7,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CourseId = 9,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CourseId = 10,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CourseId = 11,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CourseId = 12,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CourseId = 13,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CourseId = 14,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CourseId = 15,
-                            MajorId = 1
                         });
                 });
 
@@ -626,7 +476,7 @@ namespace SchedulePicker.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.StudentCourse", b =>
+            modelBuilder.Entity("SchedulePicker.Models.StudentCourses", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -645,7 +495,7 @@ namespace SchedulePicker.Data.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentCourse");
+                    b.ToTable("StudentCourses");
                 });
 
             modelBuilder.Entity("Schedule.Models.Student", b =>
@@ -720,21 +570,6 @@ namespace SchedulePicker.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.MajorCourse", b =>
-                {
-                    b.HasOne("Schedule.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SchedulePicker.Models.Major", "Major")
-                        .WithMany()
-                        .HasForeignKey("MajorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("SchedulePicker.Models.PreReq", b =>
                 {
                     b.HasOne("Schedule.Models.Course", "Course")
@@ -746,9 +581,9 @@ namespace SchedulePicker.Data.Migrations
                         .HasForeignKey("PrerequisiteId");
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.StudentCourse", b =>
+            modelBuilder.Entity("SchedulePicker.Models.StudentCourses", b =>
                 {
-                    b.HasOne("SchedulePicker.Models.StudentCourse", "Course")
+                    b.HasOne("Schedule.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId");
 

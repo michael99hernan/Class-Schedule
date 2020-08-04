@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,23 +8,23 @@ using SchedulePicker.Models;
 
 namespace SchedulePicker.Controllers
 {
-    public class StudentCoursesController : Controller
+    public class PreReqsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public StudentCoursesController(ApplicationDbContext context)
+        public PreReqsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: StudentCourses
+        // GET: PreReqs
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.StudentCourses.Include(s => s.Course).Include(s => s.Student);
+            var applicationDbContext = _context.PreReqs.Include(p => p.Course).Include(p => p.Prerequisite);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: StudentCourses/Details/5
+        // GET: PreReqs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,45 +32,45 @@ namespace SchedulePicker.Controllers
                 return NotFound();
             }
 
-            var studentCourses = await _context.StudentCourses
-                .Include(s => s.Course)
-                .Include(s => s.Student)
+            var preReq = await _context.PreReqs
+                .Include(p => p.Course)
+                .Include(p => p.Prerequisite)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (studentCourses == null)
+            if (preReq == null)
             {
                 return NotFound();
             }
 
-            return View(studentCourses);
+            return View(preReq);
         }
 
-        // GET: StudentCourses/Create
+        // GET: PreReqs/Create
         public IActionResult Create()
         {
             ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name");
-            ViewBag.Id = User.Identity.GetUserId();
+            ViewData["PrerequisiteId"] = new SelectList(_context.Courses, "CourseId", "Name");
             return View();
         }
 
-        // POST: StudentCourses/Create
+        // POST: PreReqs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StudentId,CourseId")] StudentCourses studentCourses)
+        public async Task<IActionResult> Create([Bind("Id,CourseId,PrerequisiteId")] PreReq preReq)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(studentCourses);
+                _context.Add(preReq);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", studentCourses.CourseId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Name", studentCourses.StudentId);
-            return View(studentCourses);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.CourseId);
+            ViewData["PrerequisiteId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.PrerequisiteId);
+            return View(preReq);
         }
 
-        // GET: StudentCourses/Edit/5
+        // GET: PreReqs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,24 +78,24 @@ namespace SchedulePicker.Controllers
                 return NotFound();
             }
 
-            var studentCourses = await _context.StudentCourses.FindAsync(id);
-            if (studentCourses == null)
+            var preReq = await _context.PreReqs.FindAsync(id);
+            if (preReq == null)
             {
                 return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", studentCourses.CourseId);
-            ViewBag.Id = User.Identity.GetUserId();
-            return View(studentCourses);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.CourseId);
+            ViewData["PrerequisiteId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.PrerequisiteId);
+            return View(preReq);
         }
 
-        // POST: StudentCourses/Edit/5
+        // POST: PreReqs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,CourseId")] StudentCourses studentCourses)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseId,PrerequisiteId")] PreReq preReq)
         {
-            if (id != studentCourses.Id)
+            if (id != preReq.Id)
             {
                 return NotFound();
             }
@@ -107,12 +104,12 @@ namespace SchedulePicker.Controllers
             {
                 try
                 {
-                    _context.Update(studentCourses);
+                    _context.Update(preReq);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentCoursesExists(studentCourses.Id))
+                    if (!PreReqExists(preReq.Id))
                     {
                         return NotFound();
                     }
@@ -123,13 +120,12 @@ namespace SchedulePicker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", studentCourses.CourseId);
-            ViewBag.Id = User.Identity.GetUserId();
-
-            return View(studentCourses);
+            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.CourseId);
+            ViewData["PrerequisiteId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.PrerequisiteId);
+            return View(preReq);
         }
 
-        // GET: StudentCourses/Delete/5
+        // GET: PreReqs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,32 +133,32 @@ namespace SchedulePicker.Controllers
                 return NotFound();
             }
 
-            var studentCourses = await _context.StudentCourses
-                .Include(s => s.Course)
-                .Include(s => s.Student)
+            var preReq = await _context.PreReqs
+                .Include(p => p.Course)
+                .Include(p => p.Prerequisite)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (studentCourses == null)
+            if (preReq == null)
             {
                 return NotFound();
             }
 
-            return View(studentCourses);
+            return View(preReq);
         }
 
-        // POST: StudentCourses/Delete/5
+        // POST: PreReqs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var studentCourses = await _context.StudentCourses.FindAsync(id);
-            _context.StudentCourses.Remove(studentCourses);
+            var preReq = await _context.PreReqs.FindAsync(id);
+            _context.PreReqs.Remove(preReq);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentCoursesExists(int id)
+        private bool PreReqExists(int id)
         {
-            return _context.StudentCourses.Any(e => e.Id == id);
+            return _context.PreReqs.Any(e => e.Id == id);
         }
     }
 }

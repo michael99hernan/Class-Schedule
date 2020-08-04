@@ -8,8 +8,10 @@ namespace SchedulePicker.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Student> Students { get; set; }
-        public DbSet<Course> Courses { get; set; }
+        public DbSet<StudentCourse> Courses { get; set; }
         public DbSet<PreReq> PreReqs { get; set; }
+        public DbSet<Major> Majors { get; set; }
+        public DbSet<MajorCourse> MajorCourses { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -21,6 +23,6 @@ namespace SchedulePicker.Data
             : base(options)
         {
         }
-        public DbSet<SchedulePicker.Models.StudentCourses> StudentCourses { get; set; }
+        public DbSet<SchedulePicker.Models.StudentCourse> StudentCourses { get; set; }
     }
 }

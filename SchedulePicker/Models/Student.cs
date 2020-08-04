@@ -13,7 +13,7 @@ namespace Schedule.Models
         public string Name { get; set; }
         public Year Year { get; set; }
         public int Credits { get; set; }
-        public ICollection<StudentCourses> Courses { get; set; }
+        public ICollection<StudentCourse> Courses { get; set; }
 
     }
 }

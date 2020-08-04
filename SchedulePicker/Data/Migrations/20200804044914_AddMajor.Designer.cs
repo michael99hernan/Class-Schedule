@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchedulePicker.Data;
 
 namespace SchedulePicker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200804044914_AddMajor")]
+    partial class AddMajor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,6 +246,9 @@ namespace SchedulePicker.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MajorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -255,6 +260,8 @@ namespace SchedulePicker.Data.Migrations
                         .HasMaxLength(4);
 
                     b.HasKey("CourseId");
+
+                    b.HasIndex("MajorId");
 
                     b.ToTable("Courses");
 
@@ -442,122 +449,6 @@ namespace SchedulePicker.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Majors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Computer Science",
-                            School = "Erik School of Engineering"
-                        });
-                });
-
-            modelBuilder.Entity("SchedulePicker.Models.MajorCourse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MajorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("MajorId");
-
-                    b.ToTable("MajorCourses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CourseId = 1,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CourseId = 2,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CourseId = 3,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CourseId = 4,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CourseId = 5,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CourseId = 6,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CourseId = 7,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CourseId = 9,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CourseId = 10,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CourseId = 11,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CourseId = 12,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CourseId = 13,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CourseId = 14,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CourseId = 15,
-                            MajorId = 1
-                        });
                 });
 
             modelBuilder.Entity("SchedulePicker.Models.PreReq", b =>
@@ -626,7 +517,7 @@ namespace SchedulePicker.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.StudentCourse", b =>
+            modelBuilder.Entity("SchedulePicker.Models.StudentCourses", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -645,7 +536,7 @@ namespace SchedulePicker.Data.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentCourse");
+                    b.ToTable("StudentCourses");
                 });
 
             modelBuilder.Entity("Schedule.Models.Student", b =>
@@ -720,19 +611,11 @@ namespace SchedulePicker.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.MajorCourse", b =>
+            modelBuilder.Entity("Schedule.Models.Course", b =>
                 {
-                    b.HasOne("Schedule.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SchedulePicker.Models.Major", "Major")
-                        .WithMany()
-                        .HasForeignKey("MajorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("SchedulePicker.Models.Major", null)
+                        .WithMany("Courses")
+                        .HasForeignKey("MajorId");
                 });
 
             modelBuilder.Entity("SchedulePicker.Models.PreReq", b =>
@@ -746,9 +629,9 @@ namespace SchedulePicker.Data.Migrations
                         .HasForeignKey("PrerequisiteId");
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.StudentCourse", b =>
+            modelBuilder.Entity("SchedulePicker.Models.StudentCourses", b =>
                 {
-                    b.HasOne("SchedulePicker.Models.StudentCourse", "Course")
+                    b.HasOne("Schedule.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId");
 

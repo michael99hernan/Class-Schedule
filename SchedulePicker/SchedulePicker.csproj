@@ -42,6 +42,12 @@
     <Compile Remove="Data\Migrations\20200804010408_BridgeStudentSchedule.Designer.cs" />
     <Compile Remove="Data\Migrations\20200804041403_SeedData.cs" />
     <Compile Remove="Data\Migrations\20200804041403_SeedData.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200804044032_AddMajor.cs" />
+    <Compile Remove="Data\Migrations\20200804044032_AddMajor.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200804044132_AddMajor.cs" />
+    <Compile Remove="Data\Migrations\20200804044132_AddMajor.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200804055212_fixCourses.cs" />
+    <Compile Remove="Data\Migrations\20200804055212_fixCourses.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

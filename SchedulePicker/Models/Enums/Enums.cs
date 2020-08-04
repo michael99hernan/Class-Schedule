@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SchedulePicker.Models.Enums
 {
@@ -13,6 +10,17 @@ namespace SchedulePicker.Models.Enums
             Sophmore,
             Junior,
             Senior
+        }
+        public enum CourseType
+        {
+            [Display(Name ="Core")]
+            Core,
+            [Display(Name = "Major")]
+            Major,
+            [Display(Name = "Major Elective")]
+            MajorElective,
+            [Display(Name = "Electives")]
+            Elective
         }
     }
 }
