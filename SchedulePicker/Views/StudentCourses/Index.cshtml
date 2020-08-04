@@ -1,0 +1,79 @@
+﻿@model SchedulePicker.ViewModels.StudentCourseViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Your Courses</h1>
+
+<p>
+    <a asp-action="Create">Add Course</a>
+</p>
+<b>Courses Taken</b>
+<table class="table">
+    <thead>
+
+        <tr>
+            <th>
+                Course
+            </th>
+            <th>
+                Number
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Credits
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.StudentCourses)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Prefix)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Credits)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<b>Courses Needed</b>
+
+<table class="table">
+    <thead>
+
+        <tr>
+            <th>
+                Course
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Needed)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

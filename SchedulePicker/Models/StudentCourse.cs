@@ -12,6 +12,6 @@ namespace SchedulePicker.Models
         [ForeignKey("CourseId")]
 
         public int? CourseId { get; set; }
-        public StudentCourse Course { get; set; }
+        public Course Course { get; set; }
     }
 }
