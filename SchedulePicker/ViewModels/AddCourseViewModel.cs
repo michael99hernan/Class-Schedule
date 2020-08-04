@@ -16,6 +16,8 @@ namespace SchedulePicker.ViewModels
         }
         public int StudentId { get; set; }
         public int CourseId { get; set; }
+        public string CourseNumber { get; set; }
+        public string CoursePrefix { get; set; }
         public List<SelectListItem> Courses { get; set; }
         public Student Student { get; set; }
     }

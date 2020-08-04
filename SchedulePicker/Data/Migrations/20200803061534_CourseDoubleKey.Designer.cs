@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchedulePicker.Data;
 
 namespace SchedulePicker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200803061534_CourseDoubleKey")]
+    partial class CourseDoubleKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,10 +229,12 @@ namespace SchedulePicker.Data.Migrations
 
             modelBuilder.Entity("Schedule.Models.Course", b =>
                 {
-                    b.Property<int>("CourseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Prefix")
+                        .HasColumnType("nvarchar(4)")
+                        .HasMaxLength(4);
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
                     b.Property<string>("ClassLevel")
                         .HasColumnType("nvarchar(max)");
@@ -244,36 +248,14 @@ namespace SchedulePicker.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Prefix")
-                        .HasColumnType("nvarchar(4)")
-                        .HasMaxLength(4);
-
                     b.Property<string>("StudentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("CourseId");
+                    b.HasKey("Prefix", "Number");
 
                     b.HasIndex("StudentId");
 
                     b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("SchedulePicker.Models.PreReq", b =>
-                {
-                    b.Property<int?>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PrerequisiteId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("PrerequisiteId");
-
-                    b.ToTable("PreReqs");
                 });
 
             modelBuilder.Entity("Schedule.Models.Student", b =>
@@ -356,17 +338,6 @@ namespace SchedulePicker.Data.Migrations
                     b.HasOne("Schedule.Models.Student", null)
                         .WithMany("Courses")
                         .HasForeignKey("StudentId");
-                });
-
-            modelBuilder.Entity("SchedulePicker.Models.PreReq", b =>
-                {
-                    b.HasOne("Schedule.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId");
-
-                    b.HasOne("Schedule.Models.Course", "Prerequisite")
-                        .WithMany()
-                        .HasForeignKey("PrerequisiteId");
                 });
 #pragma warning restore 612, 618
         }

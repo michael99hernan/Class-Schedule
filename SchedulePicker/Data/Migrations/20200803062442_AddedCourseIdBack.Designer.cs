@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchedulePicker.Data;
 
 namespace SchedulePicker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200803062442_AddedCourseIdBack")]
+    partial class AddedCourseIdBack
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,21 +263,6 @@ namespace SchedulePicker.Data.Migrations
                     b.ToTable("Courses");
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.PreReq", b =>
-                {
-                    b.Property<int?>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PrerequisiteId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("PrerequisiteId");
-
-                    b.ToTable("PreReqs");
-                });
-
             modelBuilder.Entity("Schedule.Models.Student", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -356,17 +343,6 @@ namespace SchedulePicker.Data.Migrations
                     b.HasOne("Schedule.Models.Student", null)
                         .WithMany("Courses")
                         .HasForeignKey("StudentId");
-                });
-
-            modelBuilder.Entity("SchedulePicker.Models.PreReq", b =>
-                {
-                    b.HasOne("Schedule.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId");
-
-                    b.HasOne("Schedule.Models.Course", "Prerequisite")
-                        .WithMany()
-                        .HasForeignKey("PrerequisiteId");
                 });
 #pragma warning restore 612, 618
         }
