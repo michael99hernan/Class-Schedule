@@ -20,5 +20,6 @@ namespace SchedulePicker.Data
             : base(options)
         {
         }
+        public DbSet<SchedulePicker.Models.StudentCourses> StudentCourses { get; set; }
     }
 }
