@@ -33,5 +33,6 @@ namespace SchedulePicker.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             return View(new AddCourseViewModel(user, courses));
         }
+
     }
 }

@@ -14,6 +14,7 @@ namespace SchedulePicker.Data
         {
             base.OnModelCreating(builder);
             builder.Entity<PreReq>().HasKey(x => x.Id);
+                   
         }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

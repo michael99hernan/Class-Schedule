@@ -38,6 +38,8 @@
     <Compile Remove="Data\Migrations\20200803235206_PreReq.Designer.cs" />
     <Compile Remove="Data\Migrations\20200803235337_PreReq.cs" />
     <Compile Remove="Data\Migrations\20200803235337_PreReq.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200804010408_BridgeStudentSchedule.cs" />
+    <Compile Remove="Data\Migrations\20200804010408_BridgeStudentSchedule.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

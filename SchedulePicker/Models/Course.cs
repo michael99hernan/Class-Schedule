@@ -15,5 +15,6 @@ namespace Schedule.Models
         public string Description { get; set; }
         public int Credits { get; set; }
         public string ClassLevel { get; set; }
+
     }
 }
