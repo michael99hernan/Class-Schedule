@@ -13,7 +13,7 @@ namespace SchedulePicker.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<PreReq>().HasNoKey();
+            builder.Entity<PreReq>().HasKey(x => x.Id);
         }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

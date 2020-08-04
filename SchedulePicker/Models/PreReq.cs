@@ -5,6 +5,7 @@ namespace SchedulePicker.Models
 {
     public class PreReq
     {
+        public int Id { get; set; }
         [ForeignKey("CourseId")]
 
         public int? CourseId { get; set; }
