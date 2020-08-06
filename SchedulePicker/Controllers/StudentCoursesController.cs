@@ -25,14 +25,25 @@ namespace SchedulePicker.Controllers
         // GET: StudentCourses
         public async Task<IActionResult> Index()
         {
+
+            return View();
+        }
+        public async Task<IActionResult> GetStudentCourses()
+        {
             var userId = User.Identity.GetUserId();
-            var sc = await _context.StudentCourses.Where(x => x.StudentId == userId).ToListAsync();
-            
+            var studentList = await _context.StudentCourses.Where(x => x.StudentId == userId).Select(x => new {x.Id, x.Course}).ToListAsync();
+            return Json(new { data = studentList });
+        }
+        public async Task<IActionResult> GetMajorCourses()
+        {
+            var userId = User.Identity.GetUserId();
+
             var c = await _context.Courses.Where(x => x.StudentId == userId).Select(x => x.Course).ToListAsync();
             var m = await _context.MajorCourses.Where(x => x.MajorId == 1).Select(x => x.Course).ToListAsync();
-            return View(new StudentCourseViewModel(sc,c,m));
+            var common = c.Intersect(m).ToList();
+            m.RemoveAll(x => common.Contains(x));
+            return Json(new { data = m });
         }
-
         // GET: StudentCourses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
