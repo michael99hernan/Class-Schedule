@@ -17,7 +17,7 @@ namespace SchedulePicker.Models
 
         [ForeignKey("CorequisiteId")]
 
-        public int? PrerequisiteId { get; set; }
-        public Course Prerequisite { get; set; }
+        public int? CorequisiteId { get; set; }
+        public Course Corequisite { get; set; }
     }
 }
