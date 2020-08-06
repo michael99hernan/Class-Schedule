@@ -12,11 +12,13 @@ namespace SchedulePicker.Data
         public DbSet<PreReq> PreReqs { get; set; }
         public DbSet<Major> Majors { get; set; }
         public DbSet<MajorCourse> MajorCourses { get; set; }
+        public DbSet<CoReq> CoReqs { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.Seed();
             builder.Entity<PreReq>().HasKey(x => x.Id);
+            builder.Entity<CoReq>().HasKey(x => x.Id);
                    
         }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
