@@ -3,136 +3,88 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    tr.row_selected td {
+        background-color: #3299CC !important;
+    }
 
-<h1>Your Courses</h1>
+</style>
+<div>
 
-<p>
-    <a asp-action="Create">Add Course</a>
-</p>
-<div class="card mb-2 ">
-    <div class="card-header">
-        Courses Taken
+    <h1>Courses</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="card mb-2 mt-5 ">
+                    <div class="card-header">
+                        <b>Courses Taken</b>
+                    </div>
+                    <div class="card-body">
+                        <table id="StudentCoursesTable" class="table table-striped table-bordered">
+                            <thead>
+
+                                <tr>
+                                    <th>
+                                        Course
+                                    </th>
+                                    <th>
+                                        Number
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Credits
+                                    </th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-danger float-right" id="DeleteButton">Delete Course</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="card mt-5 mb-2">
+                    <div class="card-header">
+                        <b>Courses Needed</b>
+                    </div>
+                    <div class="card-body">
+                        <table id="StudentCoursesNeededtable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Course
+                                    </th>
+                                    <th>
+                                        Number
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Credits
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success float-right" id="AddButton">Add Course</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <table id="StudentCoursesTable" class="table table-striped table-bordered">
-            <thead>
-
-                <tr>
-                    <th>
-                        Course
-                    </th>
-                    <th>
-                        Number
-                    </th>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Credits
-                    </th>
-                    <th></th>
-
-                </tr>
-            </thead>
-        </table>
-    </div>
-    <div class="card-footer">
-
-    </div>
+    <div></div>
 </div>
-
-<div class="card mt-5">
-    <div class="card-header">
-        Courses Needed
-    </div>
-    <div class="card-body">
-        <table id="StudentCoursesNeededtable" class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>
-                        Course
-                    </th>
-                    <th>
-                        Number
-                    </th>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Credits
-                    </th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-    <div class="card-footer">
-
-    </div>
-</div>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" />
-<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 
 @section scripts{
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-           var table = $("#StudentCoursesTable").DataTable({
-                ajax: {
-                    "url": "/StudentCourses/GetStudentCourses",
-                    "type": "GET",
-                    "datatype": "json",
-                },
-                columns: [
-                    { data: "course.prefix" },
-                    { data: "course.number" },
-                    { data: "course.name" },
-                    { data: "course.credits" },
-                    {
-                        data: null,
-                        className: "center",
-                        defaultContent: '<button>Delete</button>'
-                    }
-                ],
-                language: {
-                    "emptyTable": "You have no courses, Please Click <b>Add Course<b>"
-                }
-
-            });
-            $("#StudentCoursesNeededtable").DataTable({
-                "ajax": {
-                    "url": "/StudentCourses/GetMajorCourses",
-                    "type": "GET",
-                    "datatype": "json"
-                },
-                "columns": [
-                    { "data": "prefix" },
-                    { "data": "number" },
-                    { "data": "name" },
-                    { "data": "credits" }
-                ]
-            });
-            // Delete a record
-            $('#StudentCoursesTable tbody').on('click', 'button', function () {
-                var data = table.row().data();
-                var url = "/StudentCourses/Delete?Id=" + data.id;
-                $.ajax({
-                    url: url,
-                    type: "GET",
-                    success: function (data) {
-                        window.location.href = url;  
-                    },
-                    error: function (xhr, status, error) {
-                        var errorMessage = xhr.status + ': ' + xhr.statusText
-                        alert('Error - ' + errorMessage);
-                    }
-                });
-            });
-
-        });
-
-
-
-    </script>
+    <script src="~/View/StudentCourses/Index.js" asp-append-version="true"></script>
 }

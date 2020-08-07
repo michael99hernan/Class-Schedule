@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchedulePicker.Data;
 
 namespace SchedulePicker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200806064055_SeedCoReq")]
+    partial class SeedCoReq
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,7 +287,7 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 3,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 1,
+                            CourseType = 0,
                             Credits = 4,
                             Description = "Functions, limits, continuity, differentiation; integration of function of one variable; logarithmic, exponential, and inverse trigonometric functions; techniques of integration, and applications. Three lecture hours and two discussion hours a week; problem section required with MATH 2417, and will also be registered for exam section. Not all MATH/STAT courses may be counted toward various degree plans. Please consult your degree plan to determine the appropriate MATH/STAT course requirements. ",
                             Name = "Calculus I",
@@ -296,7 +298,7 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 4,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 1,
+                            CourseType = 0,
                             Credits = 3,
                             Description = "Calculus based. Basic physics including a study of space and time, kinematics, forces, energy and momentum, conservation laws, rotational motion, torques, and harmonic oscillation. Two lectures per week. Students will also be registered for an exam section.",
                             Name = "Mechanics",
@@ -307,7 +309,7 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 5,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 1,
+                            CourseType = 0,
                             Credits = 3,
                             Description = "Topics include electrostatics and electromagnetics, electric field and potential, electric currents, magnetic fields, laws of Coulomb, Ampere, and Faraday, Maxwell's theory of wave propagation. Two lectures per week. Students will also be registered for an exam section.",
                             Name = "Electromagnetism and Waves",
@@ -417,10 +419,10 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 15,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 1,
+                            CourseType = 0,
                             Credits = 1,
                             Description = "Laboratory course to accompany any Physics I or Mechanics course. Experiments investigate basic measurements and statistics including error, mean, standard deviation and error propagation; one dimensional and two dimensional motion; Newton's laws; conservation laws of energy and momentum; rotational motion; and oscillations.",
-                            Name = "Physics Lab I",
+                            Name = "Physics Lab",
                             Number = 2125,
                             Prefix = "PHYS"
                         },
@@ -428,89 +430,12 @@ namespace SchedulePicker.Data.Migrations
                         {
                             CourseId = 16,
                             ClassLevel = "UnderGraduate",
-                            CourseType = 1,
+                            CourseType = 0,
                             Credits = 1,
                             Description = "Laboratory course to accompany any Physics II or Electricity and Magnetism course. Experiments investigate electrostatics, electricity in simple circuits, RC circuits and magnetism. ",
                             Name = "Physics Lab II",
                             Number = 2126,
                             Prefix = "PHYS"
-                        },
-                        new
-                        {
-                            CourseId = 17,
-                            ClassLevel = "UnderGraduate",
-                            CourseType = 1,
-                            Credits = 1,
-                            Description = "Introduction to engineering and computing careers; overview of Engineering and Computer Science (ECS) curricula, connections among ECS fields and to the sciences, and other fields; basic study, problem solving, and other skills needed to succeed as an ECS major.",
-                            Name = "Introduction to Engineering and Computer Science",
-                            Number = 1100,
-                            Prefix = "ECS"
-                        },
-                        new
-                        {
-                            CourseId = 18,
-                            ClassLevel = "UnderGraduate",
-                            CourseType = 1,
-                            Credits = 2,
-                            Description = "Introduction to the computing professions; overview of Computer Science (CS) and Software Engineering (SE) curricula, connections with Computer Engineering, other Engineering and Computer Science fields, and Arts and Technology programs; problem solving and other skills needed to succeed as a CS or SE major. Introduction to quantitative methods; team projects designed to replicate decision processes and problem solving in real-world situations; additional preparatory topics for CS and SE majors.",
-                            Name = "Introduction to Computer Science and Software Engineering",
-                            Number = 1200,
-                            Prefix = "CS"
-                        },
-                        new
-                        {
-                            CourseId = 19,
-                            ClassLevel = "UnderGraduate",
-                            CourseType = 1,
-                            Credits = 3,
-                            Description = "Review of control structures and data types with emphasis on structured data types. Applies the object-oriented programming paradigm, focusing on the definition and use of classes along with the fundamentals of object-oriented design. Includes basic analysis of algorithms, searching and sorting techniques, and an introduction to software engineering. Programming language of choice is C/C++. Students will also be registered for an exam section.",
-                            Name = "Computer Science I",
-                            Number = 1337,
-                            Prefix = "CS"
-                        },
-                        new
-                        {
-                            CourseId = 20,
-                            ClassLevel = "UnderGraduate",
-                            CourseType = 1,
-                            Credits = 3,
-                            Description = "Principles of counting. Boolean operations. Logic and proof methods. Recurrence relations. Sets, relations, functions. Elementary graph theory. Elementary number theory. ",
-                            Name = "Discrete Mathematics for Computing I",
-                            Number = 2305,
-                            Prefix = "CS"
-                        },
-                        new
-                        {
-                            CourseId = 21,
-                            ClassLevel = "UnderGraduate",
-                            CourseType = 1,
-                            Credits = 3,
-                            Description = "Further applications of programming techniques, introducing the fundamental concepts of data structures and algorithms. Topics include recursion, fundamental data structures (including stacks, queues, linked lists, hash tables, trees, and graphs), and algorithmic analysis. Includes comprehensive programming projects. Programming language of choice is Java. ",
-                            Name = "Computer Science II",
-                            Number = 2336,
-                            Prefix = "CS"
-                        },
-                        new
-                        {
-                            CourseId = 22,
-                            ClassLevel = "UnderGraduate",
-                            CourseType = 1,
-                            Credits = 4,
-                            Description = "Introduces and provides models for application of the concepts of vector algebra. Topics include finite dimensional vector spaces and their geometric significance; representing and solving systems of linear equations using multiple methods, including Gaussian elimination and matrix inversion; matrices; determinants; linear transformations; quadratic forms; eigenvalues and eigenvectors; and applications in science and engineering. Three lecture hours and two discussion hours a week; ",
-                            Name = "Linear Algebra",
-                            Number = 2418,
-                            Prefix = "MATH"
-                        },
-                        new
-                        {
-                            CourseId = 23,
-                            ClassLevel = "UnderGraduate",
-                            CourseType = 1,
-                            Credits = 3,
-                            Description = "A science elective",
-                            Name = "Science Elective",
-                            Number = 0,
-                            Prefix = ""
                         });
                 });
 
@@ -699,54 +624,6 @@ namespace SchedulePicker.Data.Migrations
                             Id = 15,
                             CourseId = 15,
                             MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CourseId = 16,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CourseId = 17,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CourseId = 18,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CourseId = 19,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CourseId = 20,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 21,
-                            CourseId = 21,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 22,
-                            CourseId = 22,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 23,
-                            CourseId = 23,
-                            MajorId = 1
                         });
                 });
 
@@ -813,18 +690,6 @@ namespace SchedulePicker.Data.Migrations
                             Id = 7,
                             CourseId = 5,
                             PrerequisiteId = 14
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CourseId = 21,
-                            PrerequisiteId = 19
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CourseId = 22,
-                            PrerequisiteId = 3
                         });
                 });
 

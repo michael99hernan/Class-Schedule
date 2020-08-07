@@ -15,9 +15,11 @@ namespace SchedulePicker.Models.Enums
         {
             [Display(Name ="Core")]
             Core,
-            [Display(Name = "Major")]
+            [Display(Name = "Major Preparatory Course")]
+            MajorPrep,
+            [Display(Name = "Major Core")]
             Major,
-            [Display(Name = "Major Elective")]
+            [Display(Name = "Major Guided Elective")]
             MajorElective,
             [Display(Name = "Electives")]
             Elective

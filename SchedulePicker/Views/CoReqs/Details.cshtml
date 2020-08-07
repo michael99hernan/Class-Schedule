@@ -1,4 +1,4 @@
-﻿@model SchedulePicker.Models.StudentCourse
+﻿@model SchedulePicker.Models.CoReq
 
 @{
     ViewData["Title"] = "Details";
@@ -7,20 +7,20 @@
 <h1>Details</h1>
 
 <div>
-    <h4>StudentCourse</h4>
+    <h4>CoReq</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Student)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Student.Id)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Course)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Course.CourseId)
+            @Html.DisplayFor(model => model.Course.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Corequisite)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Corequisite.Name)
         </dd>
     </dl>
 </div>

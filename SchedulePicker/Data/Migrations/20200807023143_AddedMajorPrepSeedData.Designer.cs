@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchedulePicker.Data;
 
 namespace SchedulePicker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200807023143_AddedMajorPrepSeedData")]
+    partial class AddedMajorPrepSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -698,54 +700,6 @@ namespace SchedulePicker.Data.Migrations
                         {
                             Id = 15,
                             CourseId = 15,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CourseId = 16,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CourseId = 17,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CourseId = 18,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CourseId = 19,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CourseId = 20,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 21,
-                            CourseId = 21,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 22,
-                            CourseId = 22,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 23,
-                            CourseId = 23,
                             MajorId = 1
                         });
                 });
