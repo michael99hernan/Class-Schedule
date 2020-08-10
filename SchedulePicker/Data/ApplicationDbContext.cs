@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Schedule.Models;
 using SchedulePicker.Models;
 
 namespace SchedulePicker.Data
@@ -25,7 +24,7 @@ namespace SchedulePicker.Data
             : base(options)
         {
         }
-        public DbSet<SchedulePicker.Models.StudentCourse> StudentCourses { get; set; }
-        public DbSet<Schedule.Models.Course> Course { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
+        public DbSet<Course> Course { get; set; }
     }
 }

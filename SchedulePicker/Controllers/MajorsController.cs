@@ -7,22 +7,22 @@ using SchedulePicker.Models;
 
 namespace SchedulePicker.Controllers
 {
-    public class CoursesController : Controller
+    public class MajorsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CoursesController(ApplicationDbContext context)
+        public MajorsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Courses
+        // GET: Majors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Course.ToListAsync());
+            return View(await _context.MajorCourses.Where(x => x.MajorId == 1).Select(x => x.Course).ToListAsync());
         }
 
-        // GET: Courses/Details/5
+        // GET: Majors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,39 +30,39 @@ namespace SchedulePicker.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Course
-                .FirstOrDefaultAsync(m => m.CourseId == id);
-            if (course == null)
+            var major = await _context.Majors
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (major == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(major);
         }
 
-        // GET: Courses/Create
+        // GET: Majors/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Courses/Create
+        // POST: Majors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Prefix,CourseId,Number,Name,Description,Credits,ClassLevel,CourseType")] Course course)
+        public async Task<IActionResult> Create([Bind("Id,Name,School")] Major major)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
+                _context.Add(major);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            return View(major);
         }
 
-        // GET: Courses/Edit/5
+        // GET: Majors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -70,22 +70,22 @@ namespace SchedulePicker.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Course.FindAsync(id);
-            if (course == null)
+            var major = await _context.Majors.FindAsync(id);
+            if (major == null)
             {
                 return NotFound();
             }
-            return View(course);
+            return View(major);
         }
 
-        // POST: Courses/Edit/5
+        // POST: Majors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Prefix,CourseId,Number,Name,Description,Credits,ClassLevel,CourseType")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,School")] Major major)
         {
-            if (id != course.CourseId)
+            if (id != major.Id)
             {
                 return NotFound();
             }
@@ -94,12 +94,12 @@ namespace SchedulePicker.Controllers
             {
                 try
                 {
-                    _context.Update(course);
+                    _context.Update(major);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourseExists(course.CourseId))
+                    if (!MajorExists(major.Id))
                     {
                         return NotFound();
                     }
@@ -110,10 +110,10 @@ namespace SchedulePicker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            return View(major);
         }
 
-        // GET: Courses/Delete/5
+        // GET: Majors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,30 +121,30 @@ namespace SchedulePicker.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Course
-                .FirstOrDefaultAsync(m => m.CourseId == id);
-            if (course == null)
+            var major = await _context.Majors
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (major == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(major);
         }
 
-        // POST: Courses/Delete/5
+        // POST: Majors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _context.Course.FindAsync(id);
-            _context.Course.Remove(course);
+            var major = await _context.Majors.FindAsync(id);
+            _context.Majors.Remove(major);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourseExists(int id)
+        private bool MajorExists(int id)
         {
-            return _context.Course.Any(e => e.CourseId == id);
+            return _context.Majors.Any(e => e.Id == id);
         }
     }
 }

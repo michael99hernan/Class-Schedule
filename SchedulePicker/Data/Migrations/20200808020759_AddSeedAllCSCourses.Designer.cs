@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchedulePicker.Data;
 
 namespace SchedulePicker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200808020759_AddSeedAllCSCourses")]
+    partial class AddSeedAllCSCourses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,12 +310,7 @@ namespace SchedulePicker.Data.Migrations
                         .HasColumnType("nvarchar(4)")
                         .HasMaxLength(4);
 
-                    b.Property<int?>("ScheduleId")
-                        .HasColumnType("int");
-
                     b.HasKey("CourseId");
-
-                    b.HasIndex("ScheduleId");
 
                     b.ToTable("Courses");
 
@@ -1005,144 +1002,6 @@ namespace SchedulePicker.Data.Migrations
                             Id = 23,
                             CourseId = 23,
                             MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 24,
-                            CourseId = 24,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 25,
-                            CourseId = 25,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 26,
-                            CourseId = 26,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 27,
-                            CourseId = 27,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 28,
-                            CourseId = 28,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 29,
-                            CourseId = 29,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 30,
-                            CourseId = 30,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 31,
-                            CourseId = 31,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 32,
-                            CourseId = 32,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 33,
-                            CourseId = 33,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 34,
-                            CourseId = 34,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 35,
-                            CourseId = 35,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 36,
-                            CourseId = 36,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 37,
-                            CourseId = 37,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 38,
-                            CourseId = 38,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 39,
-                            CourseId = 39,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 40,
-                            CourseId = 40,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 41,
-                            CourseId = 41,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 42,
-                            CourseId = 42,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 43,
-                            CourseId = 43,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 44,
-                            CourseId = 44,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 45,
-                            CourseId = 45,
-                            MajorId = 1
-                        },
-                        new
-                        {
-                            Id = 46,
-                            CourseId = 46,
-                            MajorId = 1
                         });
                 });
 
@@ -1224,29 +1083,6 @@ namespace SchedulePicker.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.Schedule", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StudentId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId1");
-
-                    b.ToTable("Schedules");
-                });
-
             modelBuilder.Entity("SchedulePicker.Models.StudentCourse", b =>
                 {
                     b.Property<int>("Id")
@@ -1269,7 +1105,7 @@ namespace SchedulePicker.Data.Migrations
                     b.ToTable("StudentCourse");
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.Student", b =>
+            modelBuilder.Entity("Schedule.Models.Student", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -1352,13 +1188,6 @@ namespace SchedulePicker.Data.Migrations
                         .HasForeignKey("CourseId");
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.Course", b =>
-                {
-                    b.HasOne("SchedulePicker.Models.Schedule", null)
-                        .WithMany("Courses")
-                        .HasForeignKey("ScheduleId");
-                });
-
             modelBuilder.Entity("SchedulePicker.Models.MajorCourse", b =>
                 {
                     b.HasOne("SchedulePicker.Models.Course", "Course")
@@ -1385,20 +1214,13 @@ namespace SchedulePicker.Data.Migrations
                         .HasForeignKey("PrerequisiteId");
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.Schedule", b =>
-                {
-                    b.HasOne("SchedulePicker.Models.Student", "Student")
-                        .WithMany("Schedules")
-                        .HasForeignKey("StudentId1");
-                });
-
             modelBuilder.Entity("SchedulePicker.Models.StudentCourse", b =>
                 {
                     b.HasOne("SchedulePicker.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId");
 
-                    b.HasOne("SchedulePicker.Models.Student", "Student")
+                    b.HasOne("Schedule.Models.Student", "Student")
                         .WithMany("Courses")
                         .HasForeignKey("StudentId");
                 });

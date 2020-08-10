@@ -1,4 +1,4 @@
-﻿@model Schedule.Models.Course
+﻿@model SchedulePicker.Models.Course
 
 @{
     ViewData["Title"] = "Create";
@@ -29,9 +29,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Credits" class="control-label"></label>
                 <input asp-for="Credits" class="form-control" />

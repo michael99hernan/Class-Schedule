@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchedulePicker.Data;
 
 namespace SchedulePicker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200808021221_AddSeedAllCSCoursesMajors")]
+    partial class AddSeedAllCSCoursesMajors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,12 +310,7 @@ namespace SchedulePicker.Data.Migrations
                         .HasColumnType("nvarchar(4)")
                         .HasMaxLength(4);
 
-                    b.Property<int?>("ScheduleId")
-                        .HasColumnType("int");
-
                     b.HasKey("CourseId");
-
-                    b.HasIndex("ScheduleId");
 
                     b.ToTable("Courses");
 
@@ -1224,29 +1221,6 @@ namespace SchedulePicker.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.Schedule", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StudentId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId1");
-
-                    b.ToTable("Schedules");
-                });
-
             modelBuilder.Entity("SchedulePicker.Models.StudentCourse", b =>
                 {
                     b.Property<int>("Id")
@@ -1269,7 +1243,7 @@ namespace SchedulePicker.Data.Migrations
                     b.ToTable("StudentCourse");
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.Student", b =>
+            modelBuilder.Entity("Schedule.Models.Student", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -1352,13 +1326,6 @@ namespace SchedulePicker.Data.Migrations
                         .HasForeignKey("CourseId");
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.Course", b =>
-                {
-                    b.HasOne("SchedulePicker.Models.Schedule", null)
-                        .WithMany("Courses")
-                        .HasForeignKey("ScheduleId");
-                });
-
             modelBuilder.Entity("SchedulePicker.Models.MajorCourse", b =>
                 {
                     b.HasOne("SchedulePicker.Models.Course", "Course")
@@ -1385,20 +1352,13 @@ namespace SchedulePicker.Data.Migrations
                         .HasForeignKey("PrerequisiteId");
                 });
 
-            modelBuilder.Entity("SchedulePicker.Models.Schedule", b =>
-                {
-                    b.HasOne("SchedulePicker.Models.Student", "Student")
-                        .WithMany("Schedules")
-                        .HasForeignKey("StudentId1");
-                });
-
             modelBuilder.Entity("SchedulePicker.Models.StudentCourse", b =>
                 {
                     b.HasOne("SchedulePicker.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId");
 
-                    b.HasOne("SchedulePicker.Models.Student", "Student")
+                    b.HasOne("Schedule.Models.Student", "Student")
                         .WithMany("Courses")
                         .HasForeignKey("StudentId");
                 });

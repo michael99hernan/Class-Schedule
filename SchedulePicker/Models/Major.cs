@@ -1,5 +1,4 @@
-﻿using Schedule.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SchedulePicker.Models
 {

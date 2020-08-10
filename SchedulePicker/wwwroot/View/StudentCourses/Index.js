@@ -9,23 +9,45 @@
             "datatype": "json"
         },
         select: true,
-
+        order: [[4, "course.courseType"]],
         columns: [
             { data: "course.prefix" },
             { data: "course.number" },
             { data: "course.name" },
-            { data: "course.credits" }
+            { data: "course.credits" },
+            {
+                data: "course.courseType",
+                visible: false
+            }
         ],
         language: {
             "emptyTable": "You have no courses, Please Click <b>Add Course<b>"
         },
-        "scrollY": "350px",
-        "scrollCollapse": true,
-        "paging": false
+        success: {
+            function(data) {
+                var course = data;
+            }
+        },
+        createdRow: function (row, data, dataIndex) {
+            if (data.course.courseType == 0) {
+                $(row).css('background-color', '#76D7C4');
+            }
+            if (data.course.courseType == 1) {
+                $(row).css('background-color', '#F1948A');
+            }
+            if (data.course.courseType == 2) {
+                $(row).css('background-color', '#BB8FCE ');
+            }
+            if (data.course.courseType == 3) {
+                $(row).css('background-color', '#F7DC6F');
+            }
+
+        }
 
     });
 
     $('#StudentCoursesTable tbody').on('click', 'tr', function () {
+
         if ($(this).hasClass('row_selected')) {
             $(this).removeClass('row_selected');
         }
@@ -66,11 +88,29 @@
             { data: "prefix" },
             { data: "number" },
             { data: "name" },
-            { data: "credits" }
+            { data: "credits" },
+            {
+                data: "courseType",
+                visible: false
+            }
         ],
-        "scrollY": "350px",
-        "scrollCollapse": true,
-        "paging": false
+        order: [[4, "asc"]],
+        createdRow: function (row, data, dataIndex) {
+            if (data.courseType == 0) {
+                $(row).css('background-color', '#76D7C4');
+            }
+            if (data.courseType == 1) {
+                $(row).css('background-color', '#F1948A');
+            }
+            if (data.courseType == 2) {
+                $(row).css('background-color', '#BB8FCE ');
+            }
+            if (data.courseType == 3) {
+                $(row).css('background-color', '#F7DC6F');
+            }
+
+        }
+
     });
 
     $('#StudentCoursesNeededtable tbody').on('click', 'tr', function () {
@@ -95,7 +135,7 @@
             },
             error: function (xhr, status, error) {
                 var errorMessage = xhr.status + ': ' + xhr.statusText
-                alert("You need PreReqs");
+                alert("You need Prerequisite");
             }
         });
     });

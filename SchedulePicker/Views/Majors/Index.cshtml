@@ -4,11 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Computer Science Courses</h1>
+<h1>Computer Science</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 @section Scripts{
     <script>
         $(document).ready(function () {
@@ -17,7 +18,7 @@
     </script>
 }
 
-<table class="table table-bordered  table-striped"  id="coursetable">
+<table class="table table-bordered  table-striped" id="coursetable">
     <thead>
         <tr>
             <th>
@@ -70,9 +71,9 @@
                     @Html.DisplayFor(modelItem => item.CourseType)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> 
-                    <a asp-action="Details" asp-route-id="@item.CourseId">Details</a> 
-                    <a asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>
+                    <a asp-action="Edit" asp-controller="Courses" asp-route-id="@item.CourseId">Edit</a>
+                    <a asp-action="Details" asp-controller="Courses" asp-route-id="@item.CourseId">Details</a>
+                    <a asp-action="Delete" asp-controller="Courses" asp-route-id="@item.CourseId">Delete</a>
                 </td>
             </tr>
         }

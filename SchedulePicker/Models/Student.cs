@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using static SchedulePicker.Models.Enums.Enums;
 
-namespace Schedule.Models
+namespace SchedulePicker.Models
 {
     [Table("Students")]
     public class Student: IdentityUser
@@ -14,6 +14,7 @@ namespace Schedule.Models
         public Year Year { get; set; }
         public int Credits { get; set; }
         public ICollection<StudentCourse> Courses { get; set; }
+        public ICollection<SchedulePicker.Models.Schedule> Schedules { get; set; }
 
     }
 }

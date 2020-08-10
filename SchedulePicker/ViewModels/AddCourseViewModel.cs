@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Schedule.Models;
 using SchedulePicker.Models;
 using System.Collections.Generic;
 using System.Linq;

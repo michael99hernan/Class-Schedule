@@ -1,7 +1,4 @@
-﻿
-
-using Schedule.Models;
-using SchedulePicker.Models;
+﻿using SchedulePicker.Models;
 using System.Collections.Generic;
 using System.Linq;
 

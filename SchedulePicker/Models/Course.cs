@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Schedule.Models
+namespace SchedulePicker.Models
 {
     [Table("Courses")]
     public class Course
@@ -17,6 +17,6 @@ namespace Schedule.Models
         public int Credits { get; set; }
         public string ClassLevel { get; set; }
 
-        public Enums.CourseType CourseType { get; set; }
+        public Enums.Enums.CourseType CourseType { get; set; }
     }
 }

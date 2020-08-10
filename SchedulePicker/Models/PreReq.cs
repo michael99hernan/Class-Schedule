@@ -1,5 +1,4 @@
-﻿using Schedule.Models;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchedulePicker.Models
 {
