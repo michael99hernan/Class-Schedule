@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchedulePicker.Data;
@@ -7,6 +8,7 @@ using SchedulePicker.Models;
 
 namespace SchedulePicker.Controllers
 {
+    [Authorize]
     public class CoursesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,9 +21,18 @@ namespace SchedulePicker.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Course.ToListAsync());
+            return View(await _context.Course.Where(x => x.Number != 0).ToListAsync());
         }
-
+        public async Task<IActionResult> GetPreReqs(int id)
+        {
+            var preReqs = await _context.PreReqs.Where(x => x.CourseId == id).Select(x => x.Prerequisite).ToListAsync();
+            return Json(new { data = preReqs });
+        }
+        public async Task<IActionResult> GetCoReqs(int id)
+        {
+            var coReqs = await _context.CoReqs.Where(x => x.CourseId == id).Select(x => x.Corequisite).ToListAsync();
+            return Json(new { data = coReqs });
+        }
         // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
         {

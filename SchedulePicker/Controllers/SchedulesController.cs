@@ -10,23 +10,22 @@ using SchedulePicker.Models;
 
 namespace SchedulePicker.Controllers
 {
-    public class CoReqsController : Controller
+    public class SchedulesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CoReqsController(ApplicationDbContext context)
+        public SchedulesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: CoReqs
+        // GET: Schedules
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.CoReqs.Include(c => c.Corequisite).Include(c => c.Course);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Schedule.ToListAsync());
         }
 
-        // GET: CoReqs/Details/5
+        // GET: Schedules/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +33,39 @@ namespace SchedulePicker.Controllers
                 return NotFound();
             }
 
-            var coReq = await _context.CoReqs
-                .Include(c => c.Corequisite)
-                .Include(c => c.Course)
+            var schedule = await _context.Schedule
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (coReq == null)
+            if (schedule == null)
             {
                 return NotFound();
             }
 
-            return View(coReq);
+            return View(schedule);
         }
 
-        // GET: CoReqs/Create
+        // GET: Schedules/Create
         public IActionResult Create()
         {
-            ViewData["CorequisiteId"] = new SelectList(_context.Course, "CourseId", "Name");
-            ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "Name");
             return View();
         }
 
-        // POST: CoReqs/Create
+        // POST: Schedules/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CourseId,CorequisiteId")] CoReq coReq)
+        public async Task<IActionResult> Create([Bind("Id,Name,StudentId")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(coReq);
+                _context.Add(schedule);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CorequisiteId"] = new SelectList(_context.Course, "CourseId", "Name", coReq.CorequisiteId);
-            ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "Name", coReq.CourseId);
-            return View(coReq);
+            return View(schedule);
         }
 
-        // GET: CoReqs/Edit/5
+        // GET: Schedules/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +73,22 @@ namespace SchedulePicker.Controllers
                 return NotFound();
             }
 
-            var coReq = await _context.CoReqs.FindAsync(id);
-            if (coReq == null)
+            var schedule = await _context.Schedule.FindAsync(id);
+            if (schedule == null)
             {
                 return NotFound();
             }
-            ViewData["CorequisiteId"] = new SelectList(_context.Course, "CourseId", "Name", coReq.CorequisiteId);
-            ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "Name", coReq.CourseId);
-            return View(coReq);
+            return View(schedule);
         }
 
-        // POST: CoReqs/Edit/5
+        // POST: Schedules/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CourseId,CorequisiteId")] CoReq coReq)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,StudentId")] Schedule schedule)
         {
-            if (id != coReq.Id)
+            if (id != schedule.Id)
             {
                 return NotFound();
             }
@@ -106,12 +97,12 @@ namespace SchedulePicker.Controllers
             {
                 try
                 {
-                    _context.Update(coReq);
+                    _context.Update(schedule);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CoReqExists(coReq.Id))
+                    if (!ScheduleExists(schedule.Id))
                     {
                         return NotFound();
                     }
@@ -122,12 +113,10 @@ namespace SchedulePicker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CorequisiteId"] = new SelectList(_context.Course, "CourseId", "Name", coReq.CorequisiteId);
-            ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "Name", coReq.CourseId);
-            return View(coReq);
+            return View(schedule);
         }
 
-        // GET: CoReqs/Delete/5
+        // GET: Schedules/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,32 +124,30 @@ namespace SchedulePicker.Controllers
                 return NotFound();
             }
 
-            var coReq = await _context.CoReqs
-                .Include(c => c.Corequisite)
-                .Include(c => c.Course)
+            var schedule = await _context.Schedule
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (coReq == null)
+            if (schedule == null)
             {
                 return NotFound();
             }
 
-            return View(coReq);
+            return View(schedule);
         }
 
-        // POST: CoReqs/Delete/5
+        // POST: Schedules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var coReq = await _context.CoReqs.FindAsync(id);
-            _context.CoReqs.Remove(coReq);
+            var schedule = await _context.Schedule.FindAsync(id);
+            _context.Schedule.Remove(schedule);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CoReqExists(int id)
+        private bool ScheduleExists(int id)
         {
-            return _context.CoReqs.Any(e => e.Id == id);
+            return _context.Schedule.Any(e => e.Id == id);
         }
     }
 }

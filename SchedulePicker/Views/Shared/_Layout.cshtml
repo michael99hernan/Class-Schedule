@@ -1,47 +1,78 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<Student> signInMananger;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Schedule</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/boostrap-orange.css" />
+    <link rel="stylesheet" href="~/css/bootstrap-dark.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark  box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SchedulePicker</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Schedule Hacker</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
-                        </li>
-                        <li class="nav-item">
+                    <ul class="navbar-nav nav-pills flex-grow-1">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Student Hub</a>
+                            <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+                                <a class="dropdown-item" asp-controller="StudentCourses" asp-action="Index">Courses</a>
+                                <a class="dropdown-item" asp-controller="Schedules" asp-action="Index">Schedules</a>
+                                <a class="dropdown-item" asp-controller="Majors" asp-action="Index">Major</a>
 
-                            <a class="nav-link text-white" asp-area="" asp-controller="StudentCourses" asp-action="Index">My Classes</a>
+                            </div>
                         </li>
-                        <li class="nav-item">
+                        @if (signInMananger.IsSignedIn(User) && (User.IsInRole("Moderator") || User.IsInRole("Admin")))
+                            {<li class="nav-item dropdown">
+                                <a class="nav-link text-white dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Designer</a>
+                                <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+                                    <a class="dropdown-item" asp-controller="Courses" asp-action="Index">Courses</a>
+                                    <a class="dropdown-item" asp-controller="PreReqs" asp-action="Index">Preqrequisites</a>
+                                </div>
+                            </li>
+                        }
+                        @if (signInMananger.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="ListRoles">Admin</a>
+                            </li>
+                        }
 
-                            <a class="nav-link text-white" asp-area="" asp-controller="Majors" asp-action="Index">Major Courses</a>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="form-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
@@ -54,6 +85,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/notify.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

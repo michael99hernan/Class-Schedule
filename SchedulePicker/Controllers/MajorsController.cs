@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchedulePicker.Data;
@@ -7,6 +8,7 @@ using SchedulePicker.Models;
 
 namespace SchedulePicker.Controllers
 {
+    [Authorize]
     public class MajorsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,7 +21,7 @@ namespace SchedulePicker.Controllers
         // GET: Majors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MajorCourses.Where(x => x.MajorId == 1).Select(x => x.Course).ToListAsync());
+            return View(await _context.Majors.ToListAsync());
         }
 
         // GET: Majors/Details/5
@@ -30,14 +32,7 @@ namespace SchedulePicker.Controllers
                 return NotFound();
             }
 
-            var major = await _context.Majors
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (major == null)
-            {
-                return NotFound();
-            }
-
-            return View(major);
+            return View(await _context.MajorCourses.Where(x => x.MajorId == id).Select(x => x.Course).ToListAsync());
         }
 
         // GET: Majors/Create

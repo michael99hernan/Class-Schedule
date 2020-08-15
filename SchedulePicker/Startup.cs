@@ -24,8 +24,9 @@ namespace SchedulePicker
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<Student>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<Student>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<Microsoft.AspNetCore.Identity.IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();

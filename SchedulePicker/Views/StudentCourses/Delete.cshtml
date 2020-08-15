@@ -5,20 +5,20 @@
 }
 
 <div>
-    <h4>Delete Student Course</h4>
+    <h4>Remove Course</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Course)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Course.Name)
-        </dd class>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Course.Prefix) @Html.DisplayFor(model => model.Course.Number) @Html.DisplayFor(model => model.Course.Name)
+        </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="Remove" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

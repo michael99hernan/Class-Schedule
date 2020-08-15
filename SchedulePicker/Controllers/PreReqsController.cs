@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +10,7 @@ using SchedulePicker.Models;
 
 namespace SchedulePicker.Controllers
 {
+    [Authorize(Roles ="Moderator")]
     public class PreReqsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -47,8 +50,8 @@ namespace SchedulePicker.Controllers
         // GET: PreReqs/Create
         public IActionResult Create()
         {
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name");
-            ViewData["PrerequisiteId"] = new SelectList(_context.Courses, "CourseId", "Name");
+            ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "Name");
+            ViewData["PrerequisiteId"] = new SelectList(_context.Course, "CourseId", "Name");
             return View();
         }
 
@@ -65,8 +68,8 @@ namespace SchedulePicker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.CourseId);
-            ViewData["PrerequisiteId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.PrerequisiteId);
+            ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "Name", preReq.CourseId);
+            ViewData["PrerequisiteId"] = new SelectList(_context.Course, "CourseId", "Name", preReq.PrerequisiteId);
             return View(preReq);
         }
 
@@ -83,8 +86,8 @@ namespace SchedulePicker.Controllers
             {
                 return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.CourseId);
-            ViewData["PrerequisiteId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.PrerequisiteId);
+            ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "Name", preReq.CourseId);
+            ViewData["PrerequisiteId"] = new SelectList(_context.Course, "CourseId", "Name", preReq.PrerequisiteId);
             return View(preReq);
         }
 
@@ -120,8 +123,8 @@ namespace SchedulePicker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.CourseId);
-            ViewData["PrerequisiteId"] = new SelectList(_context.Courses, "CourseId", "Name", preReq.PrerequisiteId);
+            ViewData["CourseId"] = new SelectList(_context.Course, "CourseId", "Name", preReq.CourseId);
+            ViewData["PrerequisiteId"] = new SelectList(_context.Course, "CourseId", "Name", preReq.PrerequisiteId);
             return View(preReq);
         }
 

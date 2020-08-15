@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SchedulePicker.Data;
@@ -8,6 +9,7 @@ using SchedulePicker.Models;
 
 namespace SchedulePicker.Controllers
 {
+    [Authorize]
     public class StudentCoursesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -64,36 +66,25 @@ namespace SchedulePicker.Controllers
             //TODO: Make this an alert
             return View("Not Found");
         }
-        // GET: StudentCourses/Delete/5
+        //GET: StudentCourses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var studentCourse = await _context.Courses
-                .Include(s => s.Course)
-                .Include(s => s.Student)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (studentCourse == null)
-            {
-                return NotFound();
-            }
-
-            return View(studentCourse);
-        }
-
-        // POST: StudentCourses/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
             var studentCourse = await _context.StudentCourses.FindAsync(id);
-            _context.Courses.Remove(studentCourse);
+            _context.StudentCourses.Remove(studentCourse);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        //POST: StudentCourses/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var studentCourse = await _context.StudentCourses.FindAsync(id);
+        //    _context.Courses.Remove(studentCourse);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool StudentCourseExists(int id)
         {

@@ -4,55 +4,82 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1> @Html.DisplayFor(model => model.Name) </h1>
 
-<div>
-    <h4>Course</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prefix)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prefix)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Number)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Number)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Credits)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Credits)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClassLevel)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClassLevel)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CourseType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CourseType)
-        </dd>
-    </dl>
+@section Scripts{ 
+<script src="~/View/Courses/Details.js" asp-append-version="true"></script> 
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                @Html.DisplayFor(model => model.Prefix) @Html.DisplayFor(model => model.Number)
+                <div class="float-right">
+                    @Html.DisplayFor(model => model.Credits) Credits
+                </div>
+            </div>
+            <div class="card-body">
+                @Html.DisplayFor(model => model.Description)
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="card mt-2">
+            <div class="card-header bg-info text-white">
+                Prerequisites
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered  table-striped" id="PreReqTable" data-id="@Model.CourseId">
+                    <thead class="">
+                        <tr>
+                            <th>
+                                Course
+                            </th>
+                            <th>
+                                Number
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Credits
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+        <div class="card mt-2">
+            <div class="card-header bg-info text-white">
+                Corequisites
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered  table-striped" id="CoReqTable" data-id="@Model.CourseId">
+                    <thead>
+                        <tr>
+                            <th>
+                                Course
+                            </th>
+                            <th>
+                                Number
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Credits
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.CourseId">Edit</a> |

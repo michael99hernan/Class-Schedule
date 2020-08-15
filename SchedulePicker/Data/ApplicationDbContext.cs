@@ -26,5 +26,6 @@ namespace SchedulePicker.Data
         }
         public DbSet<StudentCourse> StudentCourses { get; set; }
         public DbSet<Course> Course { get; set; }
+        public DbSet<SchedulePicker.Models.Schedule> Schedule { get; set; }
     }
 }
