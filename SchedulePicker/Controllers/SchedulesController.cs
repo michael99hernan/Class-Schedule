@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,46 @@ namespace SchedulePicker.Controllers
             var applicationDbContext = _context.Schedule.Include(s => s.Student);
             return View(await applicationDbContext.ToListAsync());
         }
+        public async Task<IActionResult> AddtoSchedule(int scheduleId, int courseId)
+        {
+            var scheduleCourse = new ScheduleCourse()
+            {
+                Id = 0,
+                ScheduleId = scheduleId,
+                CourseId = courseId
+            };
+            if (ModelState.IsValid)
+            {
+                _context.Add(scheduleCourse);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            //TODO: Make this an alert
+            return View("Not Found");
+        }
+        public async Task<IActionResult> GetStudentSchedule(int scheduleId)
+        {
+            var userId = User.Identity.GetUserId();
+            var studentList = await _context.ScheduleCourses.Where(x => x.ScheduleId == scheduleId).Select(x => x.Course).ToListAsync();
+            return Json(new { data = studentList });
+        }
+        public async Task<IActionResult> GetMajorCourses()
+        {
+            var userId = User.Identity.GetUserId();
 
+            var c = await _context.Courses.Where(x => x.StudentId == userId).Select(x => x.Course).ToListAsync();
+            var m = await _context.MajorCourses.Where(x => x.MajorId == 1).Select(x => x.Course).ToListAsync();
+            var common = c.Intersect(m).ToList();
+            m.RemoveAll(x => common.Contains(x));
+            return Json(new { data = m });
+        }
+        public async Task<IActionResult> RemoveFromSchedule(int scheduleId, int courseId)
+        {
+            var scheduleCourse = _context.ScheduleCourses.Where(x => x.ScheduleId == scheduleId && x.CourseId == courseId);
+            _context.ScheduleCourses.Remove(scheduleCourse.FirstOrDefault());
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         // GET: Schedules/Details/5
         public async Task<IActionResult> Details(int? id)
         {
