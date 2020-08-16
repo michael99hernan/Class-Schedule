@@ -48,6 +48,8 @@
     <Compile Remove="Data\Migrations\20200804044132_AddMajor.Designer.cs" />
     <Compile Remove="Data\Migrations\20200804055212_fixCourses.cs" />
     <Compile Remove="Data\Migrations\20200804055212_fixCourses.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200816015958_ScheduleCourse.cs" />
+    <Compile Remove="Data\Migrations\20200816015958_ScheduleCourse.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

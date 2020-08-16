@@ -18,5 +18,6 @@ namespace SchedulePicker.Models
         public string ClassLevel { get; set; }
 
         public Enums.Enums.CourseType CourseType { get; set; }
+        public ICollection<ScheduleCourse> Schedules { get; set; }
     }
 }
