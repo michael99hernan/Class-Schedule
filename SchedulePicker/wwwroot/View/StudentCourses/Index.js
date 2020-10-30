@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-    var CoreColor = '#76448A';
-    var MPrepColor = '#B03A2E';
-    var MajorColor = '#1F618D';
-    var MElectColor = '#B9770E';
-    var ElectiveColor = '#AF601A ';
+    var CoreColor = '#BB8FCE';
+    var MPrepColor = '#7FB3D5';
+    var MajorColor = '#F7DC6F';
+    var MElectColor = '#F0B27A';
+    var ElectiveColor = '#F8C471';
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();

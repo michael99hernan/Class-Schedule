@@ -1,5 +1,6 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<Student> signInMananger;
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,15 +12,29 @@
 </head>
 <body>
     <header>
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark  box-shadow">
+            <div class="container">
+                <div class="row">
+                    <div class="col-10">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Schedule Hacker</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="col-2 float-right">
+                        <div class="navbar-collapse collapse d-sm-inline-flex  flex-sm-row-reverse">
+                            <partial name="_LoginPartial" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark  box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Schedule Hacker</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
                     <ul class="navbar-nav nav-pills flex-grow-1">
                         <li class="nav-item dropdown">
                             <a class="nav-link text-white dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Student Hub</a>
@@ -31,7 +46,8 @@
                             </div>
                         </li>
                         @if (signInMananger.IsSignedIn(User) && (User.IsInRole("Moderator") || User.IsInRole("Admin")))
-                            {<li class="nav-item dropdown">
+                        {
+                            <li class="nav-item dropdown">
                                 <a class="nav-link text-white dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Designer</a>
                                 <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
                                     <a class="dropdown-item" asp-controller="Courses" asp-action="Index">Courses</a>
@@ -49,8 +65,8 @@
                     </ul>
                 </div>
             </div>
-        </nav>
 
+        </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
